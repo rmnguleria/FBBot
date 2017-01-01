@@ -519,6 +519,7 @@ function sendFileMessage(recipientId) {
  *
  */
 function sendTextMessage(recipientId, messageText) {
+  console.log('messagetext',messageText);
   var headers = {
     'Host': 'kakko.pandorabots.com',
     'Connection': 'keep-alive'
