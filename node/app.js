@@ -519,17 +519,30 @@ function sendFileMessage(recipientId) {
  *
  */
 function sendTextMessage(recipientId, messageText) {
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      text: messageText,
-      metadata: "DEVELOPER_DEFINED_METADATA"
+    request({
+    uri: 'https://kakko.pandorabots.com/pandora/talk-xml',
+    method: 'GET',
+    json: 'input='+messageText+'&botid=9fa364f2fe345a10'
+  }, function (error, response, body) {
+    console.log('body',body);
+    if (!error && response.statusCode == 200) {
+      var start = body.indexOf('<that>')+6;
+      var end = body.indexOf('</that>');
+      var responseMessage = body.substring(start,end);
+      var messageData = {
+        recipient: {
+          id: recipientId
+        },
+        message: {
+          text: responseMessage,
+          metadata: "DEVELOPER_DEFINED_METADATA"
+        }
+      };
+      callSendAPI(messageData);
+    } else {
+      console.error("Failed calling Send API", response.statusCode, response.statusMessage, body.error);
     }
-  };
-
-  callSendAPI(messageData);
+  });
 }
 
 /*
