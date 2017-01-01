@@ -519,30 +519,38 @@ function sendFileMessage(recipientId) {
  *
  */
 function sendTextMessage(recipientId, messageText) {
-    request({
-    uri: 'https://kakko.pandorabots.com/pandora/talk-xml',
-    method: 'POST',
-    body: 'input='+messageText+'&botid=9fa364f2fe345a10'
-  }, function (error, response, body) {
-    console.log('body',body);
-    if (!error && response.statusCode == 200) {
-      var start = body.indexOf('<that>')+6;
-      var end = body.indexOf('</that>');
-      var responseMessage = body.substring(start,end);
-      var messageData = {
-        recipient: {
-          id: recipientId
-        },
-        message: {
-          text: responseMessage,
-          metadata: "DEVELOPER_DEFINED_METADATA"
-        }
-      };
-      callSendAPI(messageData);
-    } else {
-      console.error("Failed calling Send API", response.statusCode, response.statusMessage, body.error);
-    }
-  });
+  var headers = {
+    'Host': 'kakko.pandorabots.com',
+    'Connection': 'keep-alive'
+  };
+
+  var dataString = 'input='+messageText+'&botid=9fa364f2fe345a10&custid=9019d8ee1e0a178c';
+
+  var options = {
+      url: 'https://kakko.pandorabots.com/pandora/talk-xml',
+      method: 'POST',
+      headers: headers,
+      body: dataString
+  };
+
+  function callback(error, response, body) {
+      if (!error && response.statusCode == 200) {
+          console.log(body);
+          var start = body.indexOf('<that>')+6;
+          var end = body.indexOf('</that>');
+          var responseMessage = body.substring(start,end);
+          var messageData = {
+            recipient: {
+              id: recipientId
+            },
+            message: {
+              text: responseMessage,
+              metadata: "DEVELOPER_DEFINED_METADATA"
+            }
+          };
+          callSendAPI(messageData);
+      }
+  }
 }
 
 /*
