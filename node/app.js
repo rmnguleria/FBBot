@@ -521,8 +521,8 @@ function sendFileMessage(recipientId) {
 function sendTextMessage(recipientId, messageText) {
     request({
     uri: 'https://kakko.pandorabots.com/pandora/talk-xml',
-    method: 'GET',
-    json: 'input='+messageText+'&botid=9fa364f2fe345a10'
+    method: 'POST',
+    body: 'input='+messageText+'&botid=9fa364f2fe345a10'
   }, function (error, response, body) {
     console.log('body',body);
     if (!error && response.statusCode == 200) {
