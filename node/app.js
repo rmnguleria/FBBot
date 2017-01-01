@@ -534,8 +534,8 @@ function sendTextMessage(recipientId, messageText) {
   };
 
   function callback(error, response, body) {
+      console.log('response',body);
       if (!error && response.statusCode == 200) {
-          console.log(body);
           var start = body.indexOf('<that>')+6;
           var end = body.indexOf('</that>');
           var responseMessage = body.substring(start,end);
@@ -551,6 +551,8 @@ function sendTextMessage(recipientId, messageText) {
           callSendAPI(messageData);
       }
   }
+
+  request(options, callback);
 }
 
 /*
