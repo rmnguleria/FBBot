@@ -527,7 +527,7 @@ function sendTextMessage(recipientId, messageText) {
     'Accept-Language': 'en-US,en;q=0.5',
   };
 
-  var dataString = 'input='+encodeURI(messageText)+'&botid=9fa364f2fe345a10&custid=9019d8ee1e0a178c';
+  var dataString = 'input=The%20beautiful%20heart%2E&botid=9fa364f2fe345a10&custid=9019d8ee1e0a178c';
 
   console.log('dataString',dataString);
 
