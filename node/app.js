@@ -527,7 +527,9 @@ function sendTextMessage(recipientId, messageText) {
     'Accept-Language': 'en-US,en;q=0.5',
   };
 
-  var dataString = 'input='+messageText+'&botid=9fa364f2fe345a10&custid=9019d8ee1e0a178c';
+  var dataString = 'input='+encodeURI(messageText)+'&botid=9fa364f2fe345a10&custid=9019d8ee1e0a178c';
+
+  console.log('dataString',dataString);
 
   var options = {
       url: 'https://kakko.pandorabots.com/pandora/talk-xml',
