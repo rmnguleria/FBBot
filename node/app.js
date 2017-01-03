@@ -528,7 +528,7 @@ function sendTextMessage(recipientId, messageText) {
     'Content-Type': 'application/x-www-form-urlencoded'
   };
 
-  var dataString = 'input='+encodeURI(messageText)+'&botid=9fa364f2fe345a10&custid=9019d8ee1e0a178c';
+  var dataString = 'input='+encodeURI(messageText)+'&botid=9fa364f2fe345a10';
 
   console.log('dataString',dataString);
 
